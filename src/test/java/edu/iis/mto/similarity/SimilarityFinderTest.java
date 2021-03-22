@@ -54,4 +54,14 @@ class SimilarityFinderTest {
         double result = similarityFinder.calculateJackardSimilarity(arr1, arr2);
         assertEquals(0, result);
     }
+
+    @Test
+    void resultOfJaccardIndexShouldBeEqualToOne() {
+        sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(true).build();
+        similarityFinder = new SimilarityFinder(sequenceSearcher);
+        int[] arr1_1 = arr1.clone();
+        int[] arr2_1 = arr1_1.clone();
+        double result = similarityFinder.calculateJackardSimilarity(arr1_1, arr2_1);
+        assertEquals(1, result);
+    }
 }
