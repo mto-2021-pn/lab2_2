@@ -56,4 +56,15 @@ class SimilarityFinderTest {
 
         assertEquals(0, result);
     }
+
+    @Test
+    public void shouldReturnZeroWhenFirstSequenceLengthIsGreaterThanZeroAndSecondSequenceLengthIsZero() {
+        SimilarityFinder finder = new SimilarityFinder((elem, sequence) -> SearchResult.builder().withFound(false).build());
+        int[] seq1 = {1, 2};
+        int[] seq2 = {};
+
+        double result = finder.calculateJackardSimilarity(seq1, seq2);
+
+        assertEquals(0, result);
+    }
 }
