@@ -85,4 +85,22 @@ class SimilarityFinderTest {
 
         assertEquals(0.5d, result);
     }
+
+    @Test
+    public void shouldReturnQuarterWhenFirstSequenceContainsTwoElementsFromSecondSequenceAndUnionSizeIsEight() {
+        SearchResult found = SearchResult.builder().withFound(true).build();
+        SearchResult notFound = SearchResult.builder().withFound(false).build();
+        int[] seq1 = {1, 2, 3};
+        int[] seq2 = {2, 3, 4, 5, 6, 7, 8};
+        SimilarityFinder finder = new SimilarityFinder((elem, sequence) -> {
+            if (elem == 1) return notFound;
+            else if (elem == 2) return found;
+            else if (elem == 3) return found;
+            else return null;
+        });
+
+        double result = finder.calculateJackardSimilarity(seq1, seq2);
+
+        assertEquals(0.25d, result);
+    }
 }
