@@ -64,4 +64,20 @@ class SimilarityFinderTest {
         double result = similarityFinder.calculateJackardSimilarity(arr1_1, arr2_1);
         assertEquals(1, result);
     }
+
+    @Test
+    void searchMethodShouldBeCalledSameNumberOfTimesAsLengthOfFirstArray() throws NoSuchFieldException, IllegalAccessException {
+        sequenceSearcher = new SequenceSearcher() {
+            public int counter = 0;
+            @Override
+            public SearchResult search(int elem, int[] sequence) {
+                counter++;
+                return SearchResult.builder().withFound(true).build();
+            }
+        };
+        similarityFinder = new SimilarityFinder(sequenceSearcher);
+        similarityFinder.calculateJackardSimilarity(arr1, arr2);
+        int counterValue = (int) sequenceSearcher.getClass().getDeclaredField("counter").get(sequenceSearcher);
+        assertEquals(counterValue, arr1.length);
+    }
 }
