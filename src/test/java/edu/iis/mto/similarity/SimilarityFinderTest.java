@@ -50,6 +50,15 @@ class SimilarityFinderTest {
     }
 
     @Test
+    void resultShouldBeEqualToZero_secondArrayIsEmpty() {
+        sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(false).build();
+        similarityFinder = new SimilarityFinder(sequenceSearcher);
+        int[] arr2_1 = {};
+        double result = similarityFinder.calculateJackardSimilarity(arr1, arr2_1);
+        assertEquals(0, result);
+    }
+
+    @Test
     void resultShouldBeGreaterOrEqualToZero_arraysAreRandom() {
         sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(true).build();
         similarityFinder = new SimilarityFinder(sequenceSearcher);
