@@ -2,6 +2,7 @@ package edu.iis.mto.similarity;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.iis.mto.searcher.SearchResult;
 import edu.iis.mto.searcher.SequenceSearcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,8 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 class SimilarityFinderTest {
 
-    private final SequenceSearcher sequenceSearcher = null;
-    private final SimilarityFinder similarityFinder = new SimilarityFinder(sequenceSearcher);
+    private SequenceSearcher sequenceSearcher;
+    private SimilarityFinder similarityFinder;
     private int[] arr1;
     private int[] arr2;
 
@@ -31,9 +32,18 @@ class SimilarityFinderTest {
 
     @Test
     void resultShouldBeEqualTo1() {
+        similarityFinder = new SimilarityFinder(null);
         int[] arr1_1 = {};
         int[] arr2_1 = {};
         double result = similarityFinder.calculateJackardSimilarity(arr1_1, arr2_1);
         assertEquals(1.0d, result);
+    }
+
+    @Test
+    void resultShouldBeGreaterThan0() {
+        sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(true).build();
+        similarityFinder = new SimilarityFinder(sequenceSearcher);
+        double result = similarityFinder.calculateJackardSimilarity(arr1, arr2);
+        assertTrue(result >= 0);
     }
 }
