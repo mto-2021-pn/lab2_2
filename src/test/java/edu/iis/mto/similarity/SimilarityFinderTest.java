@@ -33,7 +33,7 @@ class SimilarityFinderTest {
     }
 
     @Test
-    void resultShouldBeEqualToOne() {
+    void resultShouldBeEqualToOne_arraysAreEmpty() {
         similarityFinder = new SimilarityFinder(null);
         int[] arr1_1 = {};
         int[] arr2_1 = {};
@@ -42,7 +42,7 @@ class SimilarityFinderTest {
     }
 
     @Test
-    void resultShouldBeGreaterOrEqualToZero() {
+    void resultShouldBeGreaterOrEqualToZero_arraysAreRandom() {
         sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(true).build();
         similarityFinder = new SimilarityFinder(sequenceSearcher);
         double result = similarityFinder.calculateJackardSimilarity(arr1, arr2);
@@ -50,7 +50,7 @@ class SimilarityFinderTest {
     }
 
     @Test
-    void resultOfJaccardIndexShouldBeEqualToZero() {
+    void resultOfJaccardIndexShouldBeEqualToZero_simulatingDifferentArrays() {
         sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(false).build();
         similarityFinder = new SimilarityFinder(sequenceSearcher);
         double result = similarityFinder.calculateJackardSimilarity(arr1, arr2);
@@ -58,7 +58,7 @@ class SimilarityFinderTest {
     }
 
     @Test
-    void resultOfJaccardIndexShouldBeEqualToOne() {
+    void resultOfJaccardIndexShouldBeEqualToOne_arraysAreEqual() {
         sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(true).build();
         similarityFinder = new SimilarityFinder(sequenceSearcher);
         int[] arr1_1 = arr1.clone();
@@ -68,14 +68,14 @@ class SimilarityFinderTest {
     }
 
     @Test
-    void firstArrayIsNull() {
+    void nullPointerExceptionShouldBeThrown_firstArrayIsNull() {
         sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(true).build();
         similarityFinder = new SimilarityFinder(sequenceSearcher);
         assertThrows(NullPointerException.class, () -> similarityFinder.calculateJackardSimilarity(null, arr2));
     }
 
     @Test
-    void secondArrayIsNull() {
+    void nullPointerExceptionShouldBeThrown_secondArrayIsNull() {
         sequenceSearcher = (elem, sequence) -> SearchResult.builder().withFound(true).build();
         similarityFinder = new SimilarityFinder(sequenceSearcher);
         assertThrows(NullPointerException.class, () -> similarityFinder.calculateJackardSimilarity(arr1, null));
