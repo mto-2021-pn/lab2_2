@@ -5,7 +5,7 @@ public class SearchResult {
     private final boolean found;
     private final int position;
 
-    private SearchResult(Builder builder) {
+    public SearchResult(Builder builder) {
         this.found = builder.found;
         this.position = builder.position;
     }
