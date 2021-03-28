@@ -2,3 +2,7 @@
 /.settings/
 /.classpath
 /.project
+.idea
+.idea/vcs.xml
+lab2_2.iml
+pom.xml

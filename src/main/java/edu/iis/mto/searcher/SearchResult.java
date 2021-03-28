@@ -1,5 +1,4 @@
 package edu.iis.mto.searcher;
-
 public class SearchResult {
 
     private final boolean found;
