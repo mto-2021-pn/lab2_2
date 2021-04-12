@@ -2,3 +2,5 @@
 /.settings/
 /.classpath
 /.project
+.idea
+lab2_2.iml
