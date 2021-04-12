@@ -1,4 +1,9 @@
 /target/
-/.settings/
+/doc/
 /.classpath
 /.project
+.settings
+.idea
+*.iml
+out
+gen
